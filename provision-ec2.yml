@@ -1,0 +1,32 @@
+------
+- name: Provision EC2 Test Server
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    aws_region: "us-east-1"
+    instance_type: "t2.micro"
+    ami_id: "ami-0b09ffb6d8b58ca91"
+    key_name: "jenkins-ec2-key"
+    sec_group: "jenkins-sg"
+
+  tasks:
+    - name: Create EC2 Instance
+      amazon.aws.ec2_instance:
+        aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+        aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+        region: "{{ aws_region }}"
+        key_name: "{{ key_name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ ami_id }}"
+        security_group: "{{ sec_group }}"
+        wait: yes
+        name: "Jenkins-Test-Server"
+        tags:
+          Name: "Jenkins-Test-Server"
+          Environment: "Test"
+      register: ec2
+
+    - name: Print instance public IP
+      debug:
+        msg: "The new instance public IP is {{ ec2.instances[0].public_ip_address }}"

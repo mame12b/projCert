@@ -1,0 +1,33 @@
+---
+- name: Deploy PHP Application
+  hosts: all
+  become: true
+  tasks:
+    - name: Clone repository
+      git:
+        repo: "https://github.com/mame12b/projCert.git"
+        dest: /tmp/app-source
+        clone: yes
+        update: yes
+
+    - name: Build Docker image
+      docker_image:
+        name: my-php-app
+        build:
+          path: /tmp/app-source
+        state: present
+
+    - name: Stop and remove existing container
+      docker_container:
+        name: php-app
+        state: absent
+      ignore_errors: yes
+
+    - name: Run PHP application container
+      docker_container:
+        name: php-app
+        image: my-php-app
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
