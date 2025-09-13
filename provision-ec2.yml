@@ -6,9 +6,9 @@
   vars:
     aws_region: "us-east-1"
     instance_type: "t3.micro"
-    ami_id: "ami-0b09ffb6d8b58ca91"
-    key_name: "jenkins-ec2-key"
-    sec_group: "jenkins-sg"
+    ami_id: "ami-0b09ffb6d8b58ca91"  # Ensure this AMI exists in your region
+    key_name: "jenkins-ec2-key"      # Ensure this key pair exists in AWS
+    sec_group: "jenkins-sg"          # Ensure this security group exists
 
   tasks:
     - name: Create EC2 Instance
@@ -19,10 +19,10 @@
         key_name: "{{ key_name }}"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami_id }}"
-        security_groups: ["{{ sec_group }}"]   # ✅ changed to `security_groups` (plural)
+        security_groups: ["{{ sec_group }}"]
         wait: yes
         count: 1
-        instance_tags:
+        tags:  # Use 'tags' instead of 'instance_tags'
           Name: "Jenkins-Test-Server"
           Environment: "Test"
       register: ec2
