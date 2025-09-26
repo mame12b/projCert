@@ -1,0 +1,16 @@
+---------------------------------------------------------------------------------------------
+|                                      DescribeImages                                       |
++------------------------+------------------------------------------------------------------+
+|  [1m[34mami-09ac0b140f63d3458[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250712[0m  |
+|  [1m[34mami-0bbdd8c17ed981ef9[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250822[0m  |
+|  [1m[34mami-0b529f3487c2c0e7f[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250508[0m  |
+|  [1m[34mami-03c89b290c1f0cf4e[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250918[0m  |
+|  [1m[34mami-090c309e8ced8ecc2[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250911[0m  |
+|  [1m[34mami-0d016af584f4febe3[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250617[0m  |
+|  [1m[34mami-07fd08aad95a03016[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250819[0m  |
+|  [1m[34mami-0a7d80731ae1b2435[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250516[0m  |
+|  [1m[34mami-0a03ce9a6035af491[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250925[0m  |
+|  [1m[34mami-021589336d307b577[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250801[0m  |
+|  [1m[34mami-02029c87fa31fb148[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250425[0m  |
+|  [1m[34mami-05ec1e5f7cfe5ef59[0m |  [1m[34mubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250627[0m  |
++------------------------+------------------------------------------------------------------+
