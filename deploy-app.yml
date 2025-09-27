@@ -2,7 +2,22 @@
 - name: Deploy PHP Application
   hosts: all
   become: true
+
   tasks:
+    - name: Ensure Apache2 is removed (to avoid conflicts)
+      apt:
+        name: apache2
+        state: absent
+        purge: yes
+        autoremove: yes
+      ignore_errors: yes
+
+    - name: Stop all running containers (if any)
+      shell: docker stop $(docker ps -aq) || true
+
+    - name: Remove all containers (if any)
+      shell: docker rm $(docker ps -aq) || true
+
     - name: Clone repository
       git:
         repo: "https://github.com/mame12b/projCert.git"
@@ -14,14 +29,9 @@
       docker_image:
         name: my-php-app
         build:
-          path: /tmp/app-source
+          path: /tmp/app-source/website
+        source: build
         state: present
-
-    - name: Stop and remove existing container
-      docker_container:
-        name: php-app
-        state: absent
-      ignore_errors: yes
 
     - name: Run PHP application container
       docker_container:
@@ -30,4 +40,5 @@
         state: started
         restart_policy: always
         ports:
-          - "80:80"
+          - "8080:80"
+
