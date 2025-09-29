@@ -6,7 +6,7 @@
   vars:
     aws_region: "us-east-1"
     instance_type: "t3.micro"
-    ami_id: "ami-0b09ffb6d8b58ca91"  # Ensure this AMI exists in your region
+    ami_id: "ami-0360c520857e3138f"  # Ensure this AMI exists in your region
     key_name: "jenkins-ec2-key"      # Ensure this key pair exists in AWS
     sec_group: "jenkins-sg"          # Ensure this security group exists
 
