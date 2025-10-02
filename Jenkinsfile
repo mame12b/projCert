@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME = 'my-php-app'
         DOCKERHUB_USER = 'mame12b'
         EC2_USER = 'ubuntu'  // or ec2-user depending on AMI
-        EC2_HOST = '54.243.179.170'
+        EC2_HOST = '44.223.20.124'
         SSH_KEY = credentials('ec2-ssh-key')  // Jenkins SSH private key
     }
 
@@ -42,15 +42,17 @@ pipeline {
             steps {
                 echo "Deploying to Kubernetes on EC2..."
                 sshagent(['ec2-ssh-key']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
-                            cd ~/ || mkdir ~/ && cd ~/
-                            git clone https://github.com/mame12b/projCert.git || (cd projCert && git pull)
-                            cd projCert
-                            kubectl apply -f k8s/php-deployment.yaml
-                            kubectl apply -f k8s/php-service.yaml
-                        '
-                    """
+		  def EC2_HOST = '44.223.20.124'
+		sh """
+		  ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} << EOF
+		    cd ~/ || mkdir ~/ && cd ~/
+		    git clone https://github.com/mame12b/projCert.git || (cd projCert && git pull)
+		    cd projCert
+		    kubectl apply -f k8s/php-deployment.yaml
+		    kubectl apply -f k8s/php-service.yaml
+		  EOF
+		"""
+
                 }
             }
         }
