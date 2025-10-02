@@ -42,7 +42,6 @@ pipeline {
             steps {
                 echo "Deploying to Kubernetes on EC2..."
                 sshagent(['ec2-ssh-key']) {
-		  def EC2_HOST = '44.223.20.124'
 		sh """
 		  ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} << EOF
 		    cd ~/ || mkdir ~/ && cd ~/
