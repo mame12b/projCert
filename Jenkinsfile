@@ -13,22 +13,21 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                echo "Cloning repository..."
+                echo "📦 Cloning repository..."
                 git url: 'https://github.com/mame12b/projCert.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image..."
-                // Assuming Dockerfile is in project root
+                echo "🐳 Building Docker image..."
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('Push Docker Image to Hub') {
+        stage('Push Docker Image to Docker Hub') {
             steps {
-                echo "Logging into Docker Hub..."
+                echo "📤 Pushing image to Docker Hub..."
                 sh """
                     echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_USER} --password-stdin
                     docker tag ${IMAGE_NAME} ${DOCKERHUB_USER}/${IMAGE_NAME}:latest
@@ -40,13 +39,15 @@ pipeline {
 
         stage('Deploy to Kubernetes on EC2') {
             steps {
-                echo "Deploying to Kubernetes on EC2..."
+                echo "🚀 Deploying to Kubernetes on EC2..."
                 sshagent(['ec2-ssh-key']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
-                            cd ~/ || mkdir ~/ && cd ~/
-                            git clone https://github.com/mame12b/projCert.git || (cd projCert && git pull)
-                            cd projCert
+                            if [ -d ~/projCert ]; then
+                                cd ~/projCert && git pull
+                            else
+                                git clone https://github.com/mame12b/projCert.git ~/projCert && cd ~/projCert
+                            fi
                             kubectl apply -f k8s/php-deployment.yaml
                             kubectl apply -f k8s/php-service.yaml
                         '
@@ -65,4 +66,3 @@ pipeline {
         }
     }
 }
-
