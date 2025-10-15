@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME = 'my-php-app'
         DOCKERHUB_USER = 'mame12b'
         EC2_USER = 'ubuntu'  // or ec2-user depending on AMI
-        EC2_HOST = '3.95.224.39'
+        EC2_HOST = '13.218.71.50'
         SSH_KEY = credentials('ec2-ssh-key')  // Jenkins SSH private key
     }
 
