@@ -6,9 +6,9 @@
   vars:
     aws_region: "us-east-1"
     instance_type: "t3.micro"
-    ami_id: "ami-0360c520857e3138f"  # Ensure this AMI exists in your region
-    key_name: "jenkins-ec2-key"      # Ensure this key pair exists in AWS
-    sec_group: "jenkins-sg"          # Ensure this security group exists
+    ami_id: "ami-052064a798f08f0d3"  # Ensure this AMI exists in your region
+    key_name: "jenkins-key"      # Ensure this key pair exists in AWS
+    sec_group: "jenkins-k8s-sg"          # Ensure this security group exists
 
   tasks:
     - name: Create EC2 Instance
