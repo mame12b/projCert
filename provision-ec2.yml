@@ -7,7 +7,7 @@
     aws_region: "us-east-1"
     instance_type: "t3.micro"
     ami_id: "ami-052064a798f08f0d3"  # Ensure this AMI exists in your region
-    key_name: "jenkins-key"      # Ensure this key pair exists in AWS
+    key_name: "jenkins-k8s-key"      # Ensure this key pair exists in AWS
     sec_group: "jenkins-k8s-sg"          # Ensure this security group exists
 
   tasks:
@@ -23,7 +23,7 @@
         wait: yes
         count: 1
         tags:  # Use 'tags' instead of 'instance_tags'
-          Name: "Jenkins-Test-Server"
+          Name: "jenkins-master"
           Environment: "Test"
       register: ec2
 
